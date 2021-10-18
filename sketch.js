@@ -49,7 +49,7 @@ function setup() {
   canvasH = backgroundH;
   createCanvas(canvasW, canvasH);
 
-  if(canvasW > 1000){
+  if(windowWidth >= 1000){
     numBirds = 100;
     numTwitter = 20;
   }

@@ -1,7 +1,7 @@
 
 
 let flock;
-let numBirds = 30;
+let numBirds = 10;
 let bird = [];
 let twitter = [];
 

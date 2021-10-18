@@ -85,7 +85,7 @@ function draw() {
   if(parseInt(random(0,numTwitter)) == 1){ 
     twitter[min(parseInt(random(0,2)),1)].play();
   }
-//   text(canvasW, 12, 60);
+text(frameRate(), 12, 60);
 }
 
 

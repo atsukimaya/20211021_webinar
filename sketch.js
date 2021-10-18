@@ -1,7 +1,7 @@
 
 
 let flock;
-let numBirds = 100;
+let numBirds = 30;
 let bird = [];
 let twitter = [];
 
@@ -13,7 +13,7 @@ let backgroundImg;
 let backgroundW, backgroundH;
 let canvasW, canvasH;
 let maxWindowW = 1000;
-let numTwitter = 20;
+let numTwitter = 40;
 
 function preload() {
   
@@ -48,9 +48,9 @@ function setup() {
   canvasH = backgroundH;
   createCanvas(canvasW, canvasH);
 
-  if(canvasW < 500){
-    numBirds = 30;
-    numTwitter = 40;
+  if(canvasW > 1000){
+    numBirds = 100;
+    numTwitter = 20;
   }
   
   flock = new Flock();

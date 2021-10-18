@@ -71,9 +71,9 @@ function setup() {
 function draw() {
   
   imageMode(CORNER);
-  image(backgroundImg, 0,0, backgroundW, backgroundH);
+//   image(backgroundImg, 0,0, backgroundW, backgroundH);
   
-  // background(backgroundImg);
+  background(backgroundImg);
   
   imageMode(CENTER);
   flock.run();

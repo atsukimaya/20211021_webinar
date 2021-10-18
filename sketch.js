@@ -21,10 +21,6 @@ function preload() {
   bird.push(loadImage('50_2.png'));
   bird.push(loadImage('50_3.png'));
   bird.push(loadImage('50_2.png'));
-  // bird.push(loadImage('2_50_1.png'));
-  // bird.push(loadImage('2_50_2.png'));
-  // bird.push(loadImage('2_50_1.png'));
-  // bird.push(loadImage('2_50_2.png'));
  
   twitter.push(loadSound('Twitter1.mp3'));
   twitter.push(loadSound('Twitter2.mp3'));
@@ -51,7 +47,7 @@ function setup() {
 
   if(windowWidth >= 1000){
     numBirds = 100;
-    numTwitter = 20;
+    numTwitter = 12;
   }
   
   flock = new Flock();
@@ -79,8 +75,10 @@ function draw() {
   imageMode(CENTER);
   flock.run();
   
-  donutMotion();
-  birdMotion();
+  if(windowWidth >= 1000){
+    donutMotion();
+    birdMotion();
+  }
   
   
   if(parseInt(random(0,numTwitter)) == 1){ 
@@ -304,7 +302,6 @@ Boid.prototype.align = function(boids) {
     sum.mult(this.maxspeed);
     let steer = p5.Vector.sub(sum, this.velocity);
     steer.limit(this.maxforce);
-    return steer;
   } else {
     return createVector(0, 0);
   }

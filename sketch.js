@@ -73,7 +73,7 @@ function draw() {
   imageMode(CORNER);
 //   image(backgroundImg, 0,0, backgroundW, backgroundH);
   
-  background(backgroundImg);
+  background(250);
   
   imageMode(CENTER);
   flock.run();

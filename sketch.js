@@ -1,7 +1,7 @@
 
 
 let flock;
-const numBirds = 100;
+let numBirds = 100;
 let bird = [];
 let twitter = [];
 
@@ -13,6 +13,7 @@ let backgroundImg;
 let backgroundW, backgroundH;
 let canvasW, canvasH;
 let maxWindowW = 1000;
+let numTwitter = 20;
 
 function preload() {
   
@@ -47,6 +48,11 @@ function setup() {
   canvasH = backgroundH;
   createCanvas(canvasW, canvasH);
 
+  if(canvasW < 500){
+    numBirds = 30;
+    numTwitter = 40;
+  }
+  
   flock = new Flock();
   // Add an initial set of boids into the system
   for (let i = 0; i < numBirds; i++) {
@@ -56,6 +62,8 @@ function setup() {
   }
   
   imageMode(CENTER);
+  
+  
 }
 
 
@@ -74,9 +82,10 @@ function draw() {
   birdMotion();
   
   
-  if(parseInt(random(0,13)) == 0){ 
+  if(parseInt(random(0,numTwitter)) == 1){ 
     twitter[min(parseInt(random(0,2)),1)].play();
   }
+  text(canvasW, 12, 60);
 }
 
 

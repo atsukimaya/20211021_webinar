@@ -1,7 +1,7 @@
 
 
 let flock;
-let numBirds = 30;
+let numBirds = 1;
 let bird = [];
 let twitter = [];
 
@@ -13,7 +13,7 @@ let backgroundImg;
 let backgroundW, backgroundH;
 let canvasW, canvasH;
 let maxWindowW = 1000;
-let numTwitter = 40;
+let numTwitter = 0;
 
 function preload() {
   

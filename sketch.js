@@ -1,7 +1,7 @@
 
 
 let flock;
-let numBirds = 1;
+let numBirds = 30;
 let bird = [];
 let twitter = [];
 
@@ -41,6 +41,7 @@ function preload() {
 }
 
 function setup() {
+  frameRate(30);
   
   canvasW = min(windowWidth, maxWindowW);
   backgroundW = canvasW;
@@ -71,9 +72,9 @@ function setup() {
 function draw() {
   
   imageMode(CORNER);
-//   image(backgroundImg, 0,0, backgroundW, backgroundH);
+  image(backgroundImg, 0,0, backgroundW, backgroundH);
   
-  background(250);
+  // background(250);
   
   imageMode(CENTER);
   flock.run();
@@ -85,7 +86,7 @@ function draw() {
   if(parseInt(random(0,numTwitter)) == 1){ 
     twitter[min(parseInt(random(0,2)),1)].play();
   }
-text(frameRate(), 12, 60);
+  text(frameRate(), 12, 60);
 }
 
 
@@ -136,10 +137,10 @@ function Boid(x, y) {
   this.position = createVector(x, y);
   this.forward = 1;
   this.scale = random(0.7, 1);
-  this.movespeed = random(40,40);
+  this.movespeed = 20;
   this.r = 5.0;
-  this.maxspeed = 2.4;    // aximum speed
-  this.maxforce = 0.05; // Maximum steering force
+  this.maxspeed = 4.8;    // aximum speed
+  this.maxforce = 0.1; // Maximum steering force
 }
 
 Boid.prototype.run = function(boids) {

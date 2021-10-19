@@ -51,22 +51,12 @@ function setupCanvas(){
 }
 function setup() {
   
-  
-  new p5.MonoSynth();
-  frameRate(30);
-  setupCanvas();
-  createCanvas(canvasW, canvasH);
-
-  // if(windowW>= 1000){
-  //   numBirds = 100;
-  //   numTwitter = 12;
-  // console.log(windowW);
-  // }
-  
   flock = new Flock();
   // Add an initial set of boids into the system
   for (let i = 0; i < numBirds; i++) {
-    let b = new Boid(random(-100, -20), random(0, height/3)); 
+    let x =  noise(i) * width;
+    let y =  noise(i*0.1) * width;
+    let b = new Boid(x, y); 
     flock.addBoid(b);
   }
 
@@ -82,16 +72,10 @@ function draw() {
   
   imageMode(CENTER);
   flock.run();
-  
-  // if(windowW >= 1000){
-  //  donutMotion();
-  //  birdMotion();
-  // }
-  
+
   
   if(parseInt(random(0,numTwitter)) == 1){ 
     // twitter[min(parseInt(random(0,2)),1)].play();
-    // mySynth.play('Twitter1.mp3');
   }
  
 }

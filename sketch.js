@@ -220,7 +220,7 @@ Boid.prototype.render = function() {
   
   let imgIndex = parseInt(map(parseInt(frameCount%this.movespeed), 0, this.movespeed, 0, 4, true));
   scale(this.scale);
-  scale(0.5);
+  scale(0.58);
   image(bird[imgIndex], 0, 0);
   pop();
 

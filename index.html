@@ -5,8 +5,26 @@
     <meta charset="utf-8">
   </head>
   <body>
-    <script src="sketch.js">
-      </script>
+     <script src="sketch.js"></script>
+    
+    <!-- 音楽 -->
+    <audio id="audio" loop>
+      <source src="twitter.mp3" type="audio/mp3">
+    </audio>
+    <!-- 再生ボタン -->
+    <div class="btns">
+      <button id="musicPlay" class="btn">
+        <img src="volume.png" alt="button" />
+      </button><!-- #musicPlay -->
+    </div><!-- .btns -->
+    
+    <script>
+      const musicBtn = document.getElementById('musicPlay');
+      musicBtn.addEventListener('click', function(){
+      document.getElementById('audio').play();
+      });
+    </script>
+    
 </body>
 </html>
 

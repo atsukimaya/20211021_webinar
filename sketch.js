@@ -17,7 +17,6 @@ let numTwitter = 12;
 
 let windowW, windowH;
 
-let mySynth;
 
 function preload() {
   
@@ -56,12 +55,6 @@ function setup() {
   frameRate(30);
   setupCanvas();
   createCanvas(canvasW, canvasH);
-
-  // if(windowW>= 1000){
-  //   numBirds = 100;
-  //   numTwitter = 12;
-  // console.log(windowW);
-  // }
   
   flock = new Flock();
   // Add an initial set of boids into the system
@@ -80,21 +73,15 @@ function draw() {
   
   imageMode(CORNER);
   image(backgroundImg, 0,0, backgroundW, backgroundH);
-  // background(250);
+  
   
   imageMode(CENTER);
   flock.run();
   
-  // if(windowW >= 1000){
-  //  donutMotion();
-  //  birdMotion();
-  // }
   
+   donutMotion();
+   birdMotion();
   
-  if(parseInt(random(0,numTwitter)) == 1){ 
-    // twitter[min(parseInt(random(0,2)),1)].play();
-    // mySynth.play('Twitter1.mp3');
-  }
  
 }
 
@@ -118,7 +105,6 @@ Flock.prototype.addBoid = function(b) {
   this.boids.push(b);
   plog = "num birds:" + this.boids.length;
   let i = parseInt(this.boids.length)%10;
-  // if( i==0 ) twitter.play();
 }
 
 // The Nature of Code
@@ -157,10 +143,6 @@ Boid.prototype.flock = function(boids) {
   let sep = this.separate(boids);   // Separation
   let ali = this.align(boids);      // Alignment
   let coh = this.cohesion(boids);   // Cohesion
-  // // Arbitrarily weight these forces
-  // sep.mult(createVector(1.5, 0.5));
-  // ali.mult(createVector(1.0, 0.5));
-  // coh.mult(createVector(1.0, 0.5));
   sep.mult(1.5);
   ali.mult(1.0);
   coh.mult(1.0);
@@ -336,7 +318,7 @@ function birdMotion(){
   else scale(1,1);
   
   let imgIndex = parseInt((frameCount%40)/10);
-  image(bird[imgIndex], 0,0);
+  if(mouseX!=0 && mouseY!=0) image(bird[imgIndex], 0,0);
   pop();
   
   
@@ -347,15 +329,14 @@ function donutMotion(){
   
   let speed = dist(donutX, donutY, mouseX, mouseY);
   
-  image(donut, donutX, donutY, 100, 100);
+  if(mouseX!=0 && mouseY!=0) image(donut, donutX, donutY, 100, 100);
     
   donutX = mouseX;
   donutY = mouseY;
   
 }
 function windowResized() {
-  // print("ウィンドウサイズの変更");
   setupCanvas();
   resizeCanvas(canvasW, canvasH);
-  // resizeCanvas(windowWidth, windowHeight);
 }
+

@@ -5,6 +5,7 @@ html, body {
 canvas {
   display: block; 
   padding-top: 25px;
+  padding-bottom: 25px;
   margin:auto auto;
   position: relative;
   z-index: 0;

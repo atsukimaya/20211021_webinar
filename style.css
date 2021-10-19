@@ -4,5 +4,30 @@ html, body {
 }
 canvas {
   display: block; 
-  margin:auto;
+  padding-top: 25px;
+  margin:auto auto;
+  position: relative;
+  z-index: 0;
+}
+
+button {
+  width: auto;
+  padding:0;
+  margin:0;
+  background:none;
+  border:0;
+  fonbu:0;
+  line-height:0;
+  overflow:visible;
+  cursor:pointer;
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  z-index: 1;
+}
+button:hover {
+  transform: scale(1.1);
+}
+.btns img{
+  width:70px;
 }

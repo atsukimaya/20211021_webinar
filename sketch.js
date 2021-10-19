@@ -51,6 +51,18 @@ function setupCanvas(){
 }
 function setup() {
   
+  
+  new p5.MonoSynth();
+  frameRate(30);
+  setupCanvas();
+  createCanvas(canvasW, canvasH);
+
+  // if(windowW>= 1000){
+  //   numBirds = 100;
+  //   numTwitter = 12;
+  // console.log(windowW);
+  // }
+  
   flock = new Flock();
   // Add an initial set of boids into the system
   for (let i = 0; i < numBirds; i++) {
@@ -72,10 +84,16 @@ function draw() {
   
   imageMode(CENTER);
   flock.run();
-
+  
+  // if(windowW >= 1000){
+  //  donutMotion();
+  //  birdMotion();
+  // }
+  
   
   if(parseInt(random(0,numTwitter)) == 1){ 
     // twitter[min(parseInt(random(0,2)),1)].play();
+    // mySynth.play('Twitter1.mp3');
   }
  
 }
@@ -112,7 +130,7 @@ Flock.prototype.addBoid = function(b) {
 
 function Boid(x, y) {
   this.acceleration = createVector(0, 0);
-  this.velocity = createVector(random(0, 1), random(0, 1));
+  this.velocity = createVector(random(1, 3), random(1, 3));
   this.position = createVector(x, y);
   this.forward = 1;
   this.scale = random(0.7, 1);

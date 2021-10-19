@@ -1,7 +1,7 @@
 
 
 let flock;
-let numBirds = 10;
+let numBirds = 100;
 let bird = [];
 let twitter = [];
 
@@ -13,7 +13,11 @@ let backgroundImg;
 let backgroundW, backgroundH;
 let canvasW, canvasH;
 let maxWindowW = 1000;
-let numTwitter = 0;
+let numTwitter = 12;
+
+let windowW, windowH;
+
+let mySynth;
 
 function preload() {
   
@@ -21,10 +25,6 @@ function preload() {
   bird.push(loadImage('50_2.png'));
   bird.push(loadImage('50_3.png'));
   bird.push(loadImage('50_2.png'));
-  // bird.push(loadImage('2_50_1.png'));
-  // bird.push(loadImage('2_50_2.png'));
-  // bird.push(loadImage('2_50_1.png'));
-  // bird.push(loadImage('2_50_2.png'));
  
   twitter.push(loadSound('Twitter1.mp3'));
   twitter.push(loadSound('Twitter2.mp3'));
@@ -38,34 +38,38 @@ function preload() {
   donutY = -100;
   
   backgroundImg = loadImage('background.png');
+  
+  windowH = windowHeight-50;
+  windowW = windowWidth*(windowHeight-50)/windowHeight;
 }
 
-function setup() {
-  frameRate(30);
-  
-  canvasW = min(windowWidth, maxWindowW);
+function setupCanvas(){
+  canvasW = min(windowW, maxWindowW);
   backgroundW = canvasW;
   backgroundH = (backgroundImg.height/backgroundImg.width)*backgroundW;
   canvasH = backgroundH;
+}
+function setup() {
+  
+  
+  new p5.MonoSynth();
+  frameRate(30);
+  setupCanvas();
   createCanvas(canvasW, canvasH);
 
-  if(windowWidth >= 1000){
-    numBirds = 100;
-    numTwitter = 12;
-  console.log(windowWidth);
-  }
+  // if(windowW>= 1000){
+  //   numBirds = 100;
+  //   numTwitter = 12;
+  // console.log(windowW);
+  // }
   
   flock = new Flock();
   // Add an initial set of boids into the system
   for (let i = 0; i < numBirds; i++) {
-    // let b = new Boid(width / 2,height / 2); 
     let b = new Boid(random(-100, -20), random(0, height/3)); 
     flock.addBoid(b);
   }
-  
-  imageMode(CENTER);
-  
-  
+
 }
 
 
@@ -74,36 +78,25 @@ function draw() {
   
   imageMode(CORNER);
   image(backgroundImg, 0,0, backgroundW, backgroundH);
-  
+  // background(250);
   
   imageMode(CENTER);
   flock.run();
   
-  if(windowWidth >= 1000){
-   donutMotion();
-   birdMotion();
-  }
+  // if(windowW >= 1000){
+  //  donutMotion();
+  //  birdMotion();
+  // }
   
   
   if(parseInt(random(0,numTwitter)) == 1){ 
-    twitter[min(parseInt(random(0,2)),1)].play();
+    // twitter[min(parseInt(random(0,2)),1)].play();
+    // mySynth.play('Twitter1.mp3');
   }
-  text(frameRate(), 12, 60);
+ 
 }
 
 
-
-// Add a new boid into the System
-function mouseDragged() {
-  // flock.addBoid(new Boid(mouseX, mouseY)); 
-}
-
-// The Nature of Code
-// Daniel Shiffman
-// http://natureofcode.com
-
-// Flock object
-// Does very little, simply manages the array of all the boids
 
 function Flock() {
   // An array for all the boids
@@ -216,7 +209,7 @@ Boid.prototype.render = function() {
   
   // translate(this.position.x, this.position.y);
   
-  let z = (this.position.y/windowHeight)*10 + 1;
+  let z = (this.position.y/windowH)*10 + 1;
   translate(this.position.x, this.position.y);
   
   push();
@@ -230,15 +223,7 @@ Boid.prototype.render = function() {
   scale(0.5);
   image(bird[imgIndex], 0, 0);
   pop();
-  
-  // push();
-  // rotate(theta);
-  // beginShape();
-  // vertex(0, -this.r * 2);
-  // vertex(-this.r, this.r * 2);
-  // vertex(this.r, this.r * 2);
-  // endShape(CLOSE);
-  // pop();
+
   
   pop();
 }
@@ -340,8 +325,6 @@ function birdMotion(){
   let forwardY = (mouseY - birdY)/30;
   
   
-  
-  
   birdX += forwardX;
   birdY += forwardY;
   
@@ -355,9 +338,7 @@ function birdMotion(){
   pop();
   
   
-  // if (twitter.isPlaying()) twitter.stop();
-  // else twitter.play();
-  
+ 
 }
 
 function donutMotion(){
@@ -365,23 +346,14 @@ function donutMotion(){
   let speed = dist(donutX, donutY, mouseX, mouseY);
   
   image(donut, donutX, donutY, 100, 100);
-  
-//   if(speed > 40)
-//   vy += gravity;
-//   donutY += vy;
-//   donutY += constrain(donutY, -1000, 300);
-  
+    
   donutX = mouseX;
   donutY = mouseY;
   
 }
-
 function windowResized() {
   // print("ウィンドウサイズの変更");
-  canvasW = min(windowWidth, maxWindowW);
-  backgroundW = canvasW;
-  backgroundH = (backgroundImg.height/backgroundImg.width)*backgroundW;
-  canvasH = backgroundH;
+  setupCanvas();
   resizeCanvas(canvasW, canvasH);
   // resizeCanvas(windowWidth, windowHeight);
 }
